@@ -19,25 +19,25 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div className="App">
+      <div className="App" >
         {/* navigation bar */}
-        <Row style={{ background: "rgb(38, 38, 38)" }}>
+        <div style={{ background: "rgb(38, 38, 38)" }}>
           <Col offset={2} >
             <Navbar switchLanguage={this.switchLanguage} />
           </Col>
-        </Row>
+        </div>
         {/* main content */}
         <Content>
           <Switch>
-            <Route exact={true} path="/" component={() => <Home language={this.state.language}/>} />
+            <Route exact={true} path="/" component={() => <Home language={this.state.language} />} />
             <Route exact={true} path="/company" component={CompanyInfo} />
             <Route exact={true} path="/owner" component={OwnerInfo} />
           </Switch>
         </Content>
         {/* footer */}
-        <Row style={{ background: "rgb(38, 38, 38)", color: "rgb(255, 255, 255)", textAlign: "center", paddingBottom: 10 }}>
+        <Row style={{ background: "rgb(38, 38, 38)", color: "rgb(255, 255, 255)", textAlign: "center", paddingBottom: 10, fontSize: 11}}>
           <Col offset={2}>
-            this is footer
+            @ RL 2018
           </Col>
         </Row>
       </div>

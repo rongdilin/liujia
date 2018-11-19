@@ -42,9 +42,9 @@ class RegisterForm extends React.Component {
 
     }
 
-    componentWillReceiveProps(nextProps){
-        if(nextProps.showModal !== this.props.showModal){
-            this.setState({showModal: nextProps.showModal});
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.showModal !== this.props.showModal) {
+            this.setState({ showModal: nextProps.showModal });
         }
     }
 
@@ -78,8 +78,8 @@ class RegisterForm extends React.Component {
 
     // handle panel switch
     saveFirstPanelInfo = () => {
-        this.setState({ 
-            secPanel: false, 
+        this.setState({
+            secPanel: false,
             activePanel: "secondPanel",
             selectedCar: this.state.carList[this.state.selectedCarIndex]
         });
@@ -133,7 +133,7 @@ class RegisterForm extends React.Component {
         let rightButtonVisible = this.state.carIndex < carList.length - 2 ? { float: "right" } : { display: "none" };
 
         let car_card = (
-            <Card title="Choose your car" bordered={false}>
+            <Card bordered={false}>
 
                 <Styles.CarCardGrid style={showLeftBorder}>
                     <Button style={leftButtonVisible} type="primary" ghost={true} onClick={this.slideLeft}>
@@ -165,12 +165,11 @@ class RegisterForm extends React.Component {
                 width={1000}
                 visible={this.state.showModal}
                 onCancel={this.handleCancel}
-                footer="Friend, please make sure you choose the time you want!"
+                footer={Localize("reminder", this.props.language)}
             >
-                <Styles.FormTitle><b>Fill the schedule form</b></Styles.FormTitle>
                 <Collapse accordion={true} defaultActiveKey="1" activeKey={this.state.activePanel}>
                     {/****** first panel: choose your car ******/}
-                    <Panel header="First step: Choose your car" key="firstPanel">
+                    <Panel header={Localize("firstPanelHeader", this.props.language)} key="firstPanel">
                         <Form>
                             {car_card}
                         </Form>
@@ -182,7 +181,7 @@ class RegisterForm extends React.Component {
                     </Panel>
 
                     {/****** second panel: fill your infomation ******/}
-                    <Panel header="Second step: Fill your infomation" key="secondPanel" disabled={this.state.secPanel}>
+                    <Panel header={Localize("SecPanelHeader", this.props.language)} key="secondPanel" disabled={this.state.secPanel}>
                         <SecondPanel
                             saveSecPanelInfo={this.saveSecPanelInfo}
                             switchToFirstPanel={this.switchToFirstPanel}
@@ -192,7 +191,7 @@ class RegisterForm extends React.Component {
                     </Panel>
 
                     {/****** third panel: choose your insurance ******/}
-                    <Panel header="Third step: Choose your insurance" key="thirdPanel" disabled={this.state.thirdPanel}>
+                    <Panel header={Localize("ThirdPanelHeader", this.props.language)} key="thirdPanel" disabled={this.state.thirdPanel}>
                         <Tabs
                             defaultActiveKey="1"
                             tabPosition="left"
@@ -209,11 +208,15 @@ class RegisterForm extends React.Component {
                     </Panel>
 
                     {/****** final panel: confirmation ******/}
-                    <Panel header="Finished!" key="fourthPanel" disabled={this.state.fourthPanel}>
+                    <Panel header={Localize("finished", this.props.language)} key="fourthPanel" disabled={this.state.fourthPanel}>
                         <div>
                             {Localize("finishForm1", this.props.language)}
                             <br />
                             {Localize("finishForm2", this.props.language)}
+                            <br />
+                            <div style={{ color: "red", marginTop: 50 }}>{Localize("plzRead", this.props.language)}</div>
+                            <div><a href={require(`../../../assets/agreement/J&G Rental Car 收费高速价格表.pdf`)} download>{Localize("highwayPay", this.props.language)}</a></div>
+                            <div><a href={require(`../../../assets/agreement/J&G Rental Car 美国行车注意事项.pdf`)} download>{Localize("driveHelp", this.props.language)}</a></div>
                         </div>
                         <br />
                         <br />

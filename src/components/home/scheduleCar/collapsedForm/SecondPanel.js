@@ -117,7 +117,7 @@ class SecondPanel extends React.Component {
                             required: true, message: Localize("plzReadAgreement", this.props.language),
                         }],
                     })(
-                        <Checkbox>{Localize("IHaveRead", this.props.language)} <a href="">{Localize("agreement", this.props.language)}</a></Checkbox>
+                        <Checkbox>{Localize("IHaveRead", this.props.language)} <a href={require(`../../../../assets/agreement/J&G Rental Car 免 责 声 明.pdf`)} download>{Localize("agreement", this.props.language)}</a></Checkbox>
                     )}
                 </FormItem>
                 <FormItem>

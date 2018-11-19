@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Select, DatePicker, Form } from "antd";
+import { Select, DatePicker, Form } from "antd";
 import BookButton from "./BookButton";
 import * as Styles from "./RegisterForm.Styles";
 import Localize from "../../../localization/Localize";
@@ -82,11 +82,11 @@ class ScheduleCarForm extends React.Component {
         return (
             <Styles.ScheduleCarForm onSubmit={this.handleSubmit} layout="inline" >
                 <h3 style={{ color: "white" }}>{Localize("bookCar", this.props.language)}</h3>
-                <Row>
-                    <Col span={12}>
+                <div>
+                    <Styles.ScheduleCarFormCol>
                         {/****** pickup ******/}
                         <FormItem>
-                            <Col>
+                            <div>
                                 <div style={{ color: "white" }}>{Localize("pickup", this.props.language)}</div>
                                 {getFieldDecorator('pickup', {
                                     rules: [{
@@ -101,12 +101,12 @@ class ScheduleCarForm extends React.Component {
                                         <Option value="la">J&G租车 - LA店</Option>
                                     </Select >
                                 )}
-                            </Col>
+                            </div>
                         </FormItem>
                         <br />
                         {/****** pickup date ******/}
                         <FormItem style={{ color: "white" }}>
-                            <Col style={{ width: 250 }}>
+                            <div style={{ width: 250 }}>
                                 <div>{Localize("pickupDate", this.props.language)}</div>
                                 {getFieldDecorator('pickupDate', {
                                     rules: [{
@@ -117,12 +117,12 @@ class ScheduleCarForm extends React.Component {
                                 })(
                                     <DatePicker style={{ width: 200 }} placeholder={Localize("selectedDate", this.props.language)} />
                                 )}
-                            </Col>
+                            </div>
                         </FormItem>
                         <br />
                         {/****** pickup time ******/}
                         <FormItem style={{ color: "white" }}>
-                            <Col style={{ width: 250 }}>
+                            <div style={{ width: 250 }}>
                                 <div>{Localize("pickupTime", this.props.language)}</div>
                                 {getFieldDecorator('pickupTime', {
                                     rules: [{
@@ -133,13 +133,13 @@ class ScheduleCarForm extends React.Component {
                                         {timeOptions}
                                     </Select>
                                 )}
-                            </Col>
+                            </div>
                         </FormItem>
-                    </Col>
-                    <Col span={12}>
+                    </Styles.ScheduleCarFormCol>
+                    <Styles.ScheduleCarFormCol>
                         {/****** dropoff ******/}
                         <FormItem style={{ color: "white" }}>
-                            <Col>
+                            <div>
                                 <div>{Localize("dropoff", this.props.language)}</div>
                                 {getFieldDecorator('dropoff', {
                                     rules: [{
@@ -152,12 +152,12 @@ class ScheduleCarForm extends React.Component {
                                         <Option value="la">J&G租车 - LA店</Option>
                                     </Select >
                                 )}
-                            </Col>
+                            </div>
                         </FormItem>
                         <br />
                         {/****** dropoff date ******/}
                         <FormItem style={{ color: "white" }}>
-                            <Col style={{ width: 250 }}>
+                            <div style={{ width: 250 }}>
                                 <div>{Localize("dropoffDate", this.props.language)}</div>
                                 {getFieldDecorator('dropoffDate', {
                                     rules: [{
@@ -168,12 +168,12 @@ class ScheduleCarForm extends React.Component {
                                 })(
                                     <DatePicker style={{ width: 200 }} placeholder={Localize("selectedDate", this.props.language)} />
                                 )}
-                            </Col>
+                            </div>
                         </FormItem>
                         <br />
                         {/****** dropoff time ******/}
                         <FormItem style={{ color: "white" }}>
-                            <Col style={{ width: 250 }}>
+                            <div style={{ width: 250 }}>
                                 <div>{Localize("dropoffTime", this.props.language)}</div>
                                 {getFieldDecorator('dropoffTime', {
                                     rules: [{
@@ -184,10 +184,10 @@ class ScheduleCarForm extends React.Component {
                                         {timeOptions}
                                     </Select>
                                 )}
-                            </Col>
+                            </div>
                         </FormItem>
-                    </Col>
-                </Row>
+                    </Styles.ScheduleCarFormCol>
+                </div>
                 <FormItem>
                     <BookButton
                         showModal={this.state.showModal}

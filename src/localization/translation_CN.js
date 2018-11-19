@@ -33,7 +33,14 @@ export const translationCN = {
     "plzInput": "请输入您的",
     "plzReadAgreement": "请读协议",
     "inputNotValid": "输入的不是有效的",
-    "plzSelect": "请选择您的"
-
+    "plzSelect": "请选择您的",
+    "plzRead": "强烈建议阅读：",
+    "highwayPay": "高速收费价格表",
+    "driveHelp": "美国行车注意事项",
+    "reminder": "请检查好您的订车时间，谢谢！",
+    "firstPanelHeader": "第一步：选择您的车型",
+    "SecPanelHeader": "第二步：填写您的有关信息",
+    "ThirdPanelHeader": "第三步：选择您的保险",
+    "finished": "完成订单!"
 }
 export default translationCN;

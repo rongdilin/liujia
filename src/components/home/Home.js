@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout, Row, Col, Divider } from "antd";
-import CarCardBar from "./CarCardBar";
+// import CarCardBar from "./CarCardBar";
 import CompanyIntro from './CompanyIntro';
 import Partner from "./Partner";
 import ScheduleCarForm from './scheduleCar/ScheduleCarForm';
@@ -27,12 +27,12 @@ class Home extends React.Component {
                     <h3><b>{Localize("slogan", this.props.language)}</b></h3>
                 </Row>
                 <Divider />
-                <Row style={{ background: "rgb(38, 38, 38)" }}>
+                {/* <Row style={{ background: "rgb(38, 38, 38)" }}>
                     <Col offset={2}>
                         <CarCardBar />
                     </Col>
                 </Row>
-                <Divider />
+                <Divider /> */}
                 <CompanyIntro />
                 <Divider />
                 <Partner language={this.props.language}/>

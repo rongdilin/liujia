@@ -11,7 +11,7 @@ import { BrowserRouter } from "react-router-dom";
 // const history = createBrowserHistory();
 
 ReactDOM.render((
-    <BrowserRouter basename="http://rongdilin.github.io/liujia">
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
         <App />
     </BrowserRouter>
 ), document.getElementById('root'));

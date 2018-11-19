@@ -33,7 +33,14 @@ export const translationEN = {
     "plzInput": "Please input your",
     "plzReadAgreement": "Please read the agreement",
     "inputNotValid": "The input is not valid",
-    "plzSelect": "Please select your"
-
+    "plzSelect": "Please select your",
+    "plzRead": "Strongly recommended to read: ",
+    "highwayPay": "US highway price list",
+    "driveHelp": "US traffic precaution",
+    "reminder": "Friend, please make sure you choose the time you want!",
+    "firstPanelHeader": "First step: Choose your car",
+    "SecPanelHeader": "Second step: Fill your infomation",
+    "ThirdPanelHeader": "Third step: Choose your insurance",
+    "finished": "Finished!"
 }
 export default translationEN;
