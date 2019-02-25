@@ -13,6 +13,10 @@ export const translationEN = {
     "selectedDate": "Select date",
     "home": "Home",
     "company": "Company",
+    "location": "Location",
+    "connectUs": "Connect us",
+    "cars": "Cars",
+    "services": "Services",
     "finishForm1": "Congratulation! You have finished all required steps.",
     "finishForm2": "If things are good, please click on Submit button to submit your order.",
     "submit": "Submit",
@@ -41,6 +45,13 @@ export const translationEN = {
     "firstPanelHeader": "First step: Choose your car",
     "SecPanelHeader": "Second step: Fill your infomation",
     "ThirdPanelHeader": "Third step: Choose your insurance",
-    "finished": "Finished!"
+    "finished": "Finished!",
+    "seattle": "Seattle",
+    "lynwood": "Lynwood",
+    "la": "Los Angeles",
+    "selectTimeLocation": "Select time & location",
+    "selectCar": "Select your car",
+    "selectInsurance": "Select your insurance",
+    "checkOrder": "Check your order"
 }
 export default translationEN;

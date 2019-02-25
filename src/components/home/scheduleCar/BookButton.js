@@ -18,13 +18,14 @@ class BookButton extends React.Component {
 
     render() {
         return (
-            <div style={{ marginTop: "20px" }}>
-                <Button type="primary" htmlType="submit">{Localize("bookCarButton", this.props.language)}</Button>
+            <div style={{ marginTop: "50px" }}>
+                <Button size="large" type="primary" htmlType="submit">{Localize("bookCarButton", this.props.language)}</Button>
                 <RegisterForm
                     submitOrder={this.submitOrder}
                     showModal={this.props.showModal}
                     closeModal={this.closeModal}
                     language={this.props.language}
+                    orderTimeLocation={this.props.orderTimeLocation}
                 />
             </div>
         );

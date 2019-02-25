@@ -1,5 +1,5 @@
 import React from 'react';
-import { Select, DatePicker, Form } from "antd";
+import { Select, DatePicker, TimePicker, Form, Row } from "antd";
 import BookButton from "./BookButton";
 import * as Styles from "./RegisterForm.Styles";
 import Localize from "../../../localization/Localize";
@@ -22,7 +22,8 @@ class ScheduleCarForm extends React.Component {
             pickupTime: "",
             dropoffTime: "",
             showModal: false,
-            orderTime: null
+            orderTimeLocation: null,
+            showReturnCarSelect: false
         }
     }
 
@@ -37,13 +38,13 @@ class ScheduleCarForm extends React.Component {
     resetState = () => {
         this.setState({
             showModal: false,
-            orderTime: null
+            orderTimeLocation: null
         })
     }
 
     submitOrder = (order) => {
 
-        console.log("order in client :", { order, orderTime: this.state.orderTime });
+        // console.log("order in client :", { order, orderTimeLocation: this.state.orderTimeLocation });
         fetch("http://localhost:4000/sendemail",
             {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -54,7 +55,7 @@ class ScheduleCarForm extends React.Component {
                     "Content-Type": "application/json; charset=utf-8",
                     // "Content-Type": "application/x-www-form-urlencoded",
                 },
-                body: JSON.stringify({ order, orderTime: this.state.orderTime }) // body data type must match "Content-Type" header
+                body: JSON.stringify({ order, orderTime: this.state.orderTimeLocation }) // body data type must match "Content-Type" header
             })
             .then(result => {
                 console.log(result);
@@ -70,9 +71,14 @@ class ScheduleCarForm extends React.Component {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                this.setState({ showModal: true, orderTime: values });
+                console.log("data: ", values);
+                this.setState({ showModal: true, orderTimeLocation: values });
             }
         });
+    }
+
+    showReturnCarSelect = () => {
+        this.setState({showReturnCarSelect: true});
     }
 
     render() {
@@ -83,7 +89,7 @@ class ScheduleCarForm extends React.Component {
             <Styles.ScheduleCarForm onSubmit={this.handleSubmit} layout="inline" >
                 <h3 style={{ color: "white" }}>{Localize("bookCar", this.props.language)}</h3>
                 <div>
-                    <Styles.ScheduleCarFormCol>
+                    <Row gutter={12} onClick={this.showReturnCarSelect}>
                         {/****** pickup ******/}
                         <FormItem>
                             <div>
@@ -95,18 +101,17 @@ class ScheduleCarForm extends React.Component {
                                         required: true, message: `${Localize("plzSelect", this.props.language)} ${Localize("pickup", this.props.language)}`,
                                     }],
                                 })(
-                                    <Select style={{ width: 280 }} onChange={this.selectPickup}>
-                                        <Option value="seattle">J&G租车 - Seattle店</Option>
-                                        <Option value="lynwood">J&G租车 - Lynwood店</Option>
-                                        <Option value="la">J&G租车 - LA店</Option>
+                                    <Select size="large" style={{ width: 280 }} onChange={this.selectPickup}>
+                                        <Option value="seattle">{Localize("seattle", this.props.language)}</Option>
+                                        <Option value="lynwood">{Localize("lynwood", this.props.language)}</Option>
+                                        <Option value="la">{Localize("la", this.props.language)}</Option>
                                     </Select >
                                 )}
                             </div>
                         </FormItem>
-                        <br />
                         {/****** pickup date ******/}
                         <FormItem style={{ color: "white" }}>
-                            <div style={{ width: 250 }}>
+                            <div style={{ width: 200 }}>
                                 <div>{Localize("pickupDate", this.props.language)}</div>
                                 {getFieldDecorator('pickupDate', {
                                     rules: [{
@@ -115,28 +120,29 @@ class ScheduleCarForm extends React.Component {
                                         required: true, message: `${Localize("plzSelect", this.props.language)} ${Localize("pickupDate", this.props.language)}`,
                                     }],
                                 })(
-                                    <DatePicker style={{ width: 200 }} placeholder={Localize("selectedDate", this.props.language)} />
+                                    <DatePicker size="large" style={{ width: 200 }} placeholder={Localize("selectedDate", this.props.language)} />
                                 )}
                             </div>
                         </FormItem>
-                        <br />
                         {/****** pickup time ******/}
                         <FormItem style={{ color: "white" }}>
-                            <div style={{ width: 250 }}>
+                            <div style={{ width: 150 }}>
                                 <div>{Localize("pickupTime", this.props.language)}</div>
                                 {getFieldDecorator('pickupTime', {
                                     rules: [{
                                         required: true, message: `${Localize("plzSelect", this.props.language)} ${Localize("pickupTime", this.props.language)}`,
                                     }],
                                 })(
-                                    <Select style={{ width: 100 }}>
+                                    <Select size="large" style={{ width: 100 }}>
                                         {timeOptions}
                                     </Select>
+                                    // [TODO]: update timePicker
+                                    // <TimePicker size="large" style={{ width: 150 }} use12Hours format="HH:mm a" placeholder=""/>
                                 )}
                             </div>
                         </FormItem>
-                    </Styles.ScheduleCarFormCol>
-                    <Styles.ScheduleCarFormCol>
+                    </Row>
+                    <Row gutter={12} style={{ display: this.state.showReturnCarSelect ? "block" : "none" }}>
                         {/****** dropoff ******/}
                         <FormItem style={{ color: "white" }}>
                             <div>
@@ -146,18 +152,17 @@ class ScheduleCarForm extends React.Component {
                                         required: true, message: `${Localize("plzSelect", this.props.language)} ${Localize("dropoff", this.props.language)}`,
                                     }],
                                 })(
-                                    <Select style={{ width: 280 }} onChange={this.selectDropoff}>
-                                        <Option value="seattle">J&G租车 - Seattle店</Option>
-                                        <Option value="lynwood">J&G租车 - Lynwood店</Option>
-                                        <Option value="la">J&G租车 - LA店</Option>
+                                    <Select size="large" style={{ width: 280 }} onChange={this.selectDropoff}>
+                                        <Option value="seattle">{Localize("seattle", this.props.language)}</Option>
+                                        <Option value="lynwood">{Localize("lynwood", this.props.language)}</Option>
+                                        <Option value="la">{Localize("la", this.props.language)}</Option>
                                     </Select >
                                 )}
                             </div>
                         </FormItem>
-                        <br />
                         {/****** dropoff date ******/}
                         <FormItem style={{ color: "white" }}>
-                            <div style={{ width: 250 }}>
+                            <div style={{ width: 200 }}>
                                 <div>{Localize("dropoffDate", this.props.language)}</div>
                                 {getFieldDecorator('dropoffDate', {
                                     rules: [{
@@ -166,27 +171,26 @@ class ScheduleCarForm extends React.Component {
                                         required: true, message: `${Localize("plzSelect", this.props.language)} ${Localize("dropoffDate", this.props.language)}`,
                                     }],
                                 })(
-                                    <DatePicker style={{ width: 200 }} placeholder={Localize("selectedDate", this.props.language)} />
+                                    <DatePicker size="large" style={{ width: 200 }} placeholder={Localize("selectedDate", this.props.language)} />
                                 )}
                             </div>
                         </FormItem>
-                        <br />
                         {/****** dropoff time ******/}
                         <FormItem style={{ color: "white" }}>
-                            <div style={{ width: 250 }}>
+                            <div style={{ width: 100 }}>
                                 <div>{Localize("dropoffTime", this.props.language)}</div>
                                 {getFieldDecorator('dropoffTime', {
                                     rules: [{
                                         required: true, message: `${Localize("plzSelect", this.props.language)} ${Localize("dropoffTime", this.props.language)}`,
                                     }],
                                 })(
-                                    <Select style={{ width: 100 }}>
+                                    <Select size="large" style={{ width: 100 }}>
                                         {timeOptions}
                                     </Select>
                                 )}
                             </div>
                         </FormItem>
-                    </Styles.ScheduleCarFormCol>
+                    </Row>
                 </div>
                 <FormItem>
                     <BookButton
@@ -195,6 +199,7 @@ class ScheduleCarForm extends React.Component {
                         openModal={this.openModal}
                         submitOrder={this.submitOrder}
                         language={this.props.language}
+                        orderTimeLocation={this.state.orderTimeLocation ? this.state.orderTimeLocation : null}
                     />
                 </FormItem>
             </Styles.ScheduleCarForm>

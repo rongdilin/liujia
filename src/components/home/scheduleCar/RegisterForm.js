@@ -1,5 +1,6 @@
 import React from 'react';
-import { Form, Icon, Button, Collapse, Tabs, Card, Modal } from 'antd';
+import moment from 'moment';
+import { Form, Icon, Button, Collapse, Tabs, Card, Modal, Steps, Divider } from 'antd';
 import ImageSection from "./collapsedForm/ImageSection";
 import * as Styles from "./RegisterForm.Styles";
 import SecondPanel from "./collapsedForm/SecondPanel";
@@ -7,7 +8,7 @@ import Localize from "../../../localization/Localize";
 
 const Panel = Collapse.Panel;
 const TabPane = Tabs.TabPane;
-
+const Step = Steps.Step;
 
 class RegisterForm extends React.Component {
     constructor(props) {
@@ -37,7 +38,11 @@ class RegisterForm extends React.Component {
                 "2017 Subaru Forester",
                 "2017 Toyota Camry SE",
                 "2018 Mercedes Benz C300 Convertible"
-            ]
+            ],
+            firstProcessState: "finish",
+            secProcessState: "process",
+            thirdProcessState: "wait",
+            fourProcessState: "wait"
         };
 
     }
@@ -81,14 +86,25 @@ class RegisterForm extends React.Component {
         this.setState({
             secPanel: false,
             activePanel: "secondPanel",
-            selectedCar: this.state.carList[this.state.selectedCarIndex]
+            selectedCar: this.state.carList[this.state.selectedCarIndex],
+            secProcessState: "finish",
+            thirdProcessState: "process"
         });
     }
     saveSecPanelInfo = () => {
-        this.setState({ thirdPanel: false, activePanel: "thirdPanel" });
+        this.setState({ 
+            thirdPanel: false,
+            activePanel: "thirdPanel",
+            thirdProcessState: "finish",
+            fourProcessState: "process"
+        });
     }
     saveThirdPanelInfo = () => {
-        this.setState({ fourthPanel: false, activePanel: "fourthPanel" });
+        this.setState({ 
+            fourthPanel: false, 
+            activePanel: "fourthPanel",
+            fourProcessState: "finish"
+        });
     }
 
     switchToFirstPanel = () => {
@@ -159,6 +175,24 @@ class RegisterForm extends React.Component {
             </Card>
         );
 
+        let orderTimeLocation = this.props.orderTimeLocation ? 
+        (
+        <div>
+            <div style={{ display: "flex" }}>
+                <Card title={Localize("pickup", this.props.language)} style={{ width: 300 }} bordered={false}>
+                    <p>{Localize(this.props.orderTimeLocation.pickup, this.props.language)}</p>
+                    <p>{moment(this.props.orderTimeLocation.pickupDate).format('ll')}</p>
+                    <p>{this.props.orderTimeLocation.pickupTime}</p>
+                </Card>
+                <Card title={Localize("dropoff", this.props.language)} style={{ width: 300 }} bordered={false}>
+                    <p>{Localize(this.props.orderTimeLocation.dropoff, this.props.language)}</p>
+                    <p>{moment(this.props.orderTimeLocation.dropoffDate).format('ll')}</p>
+                    <p>{this.props.orderTimeLocation.dropoffTime}</p>
+                </Card>
+            </div>
+            <Divider />
+        </div>
+        ) : null;
 
         return (
             <Modal
@@ -167,6 +201,16 @@ class RegisterForm extends React.Component {
                 onCancel={this.handleCancel}
                 footer={Localize("reminder", this.props.language)}
             >
+                {/****** process bar ******/}
+                <Steps style={{ margin: "20px 0" }} progressDot>
+                    <Step status={this.state.firstProcessState} title={Localize("selectTimeLocation", this.props.language)} />
+                    <Step status={this.state.secProcessState} title={Localize("selectCar", this.props.language)} />
+                    <Step status={this.state.thirdProcessState} title={Localize("selectInsurance", this.props.language)} />
+                    <Step status={this.state.fourProcessState} title={Localize("checkOrder", this.props.language)} />
+                </Steps>
+                {/****** order time and location ******/}
+                {orderTimeLocation}
+                {/****** order detail ******/}
                 <Collapse accordion={true} defaultActiveKey="1" activeKey={this.state.activePanel}>
                     {/****** first panel: choose your car ******/}
                     <Panel header={Localize("firstPanelHeader", this.props.language)} key="firstPanel">

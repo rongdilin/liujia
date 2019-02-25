@@ -13,6 +13,10 @@ export const translationCN = {
     "selectedDate": "选择日期",
     "home": "首页",
     "company": "公司",
+    "location": "店面",
+    "connectUs": "联系我们",
+    "cars": "车辆",
+    "services": "服务", 
     "finishForm1": "恭喜! 你已经完成所有步骤",
     "finishForm2": "如果您检查完毕，请点击提交完成您的订单",
     "submit": "提交",
@@ -41,6 +45,13 @@ export const translationCN = {
     "firstPanelHeader": "第一步：选择您的车型",
     "SecPanelHeader": "第二步：填写您的有关信息",
     "ThirdPanelHeader": "第三步：选择您的保险",
-    "finished": "完成订单!"
+    "finished": "完成订单!",
+    "seattle": "J&G租车 - Seattle店",
+    "lynwood": "J&G租车 - Lynwood店",
+    "la": "J&G租车 - LA店",
+    "selectTimeLocation": "选择时间&地点",
+    "selectCar": "选择您的车辆",
+    "selectInsurance": "选择您的保险",
+    "checkOrder": "检查您的订单"
 }
 export default translationCN;

@@ -2,7 +2,6 @@ import React from 'react';
 import { Layout, Row, Col, Divider } from "antd";
 // import CarCardBar from "./CarCardBar";
 import CompanyIntro from './CompanyIntro';
-import Partner from "./Partner";
 import ScheduleCarForm from './scheduleCar/ScheduleCarForm';
 import Localize from "../../localization/Localize";
 
@@ -16,6 +15,7 @@ class Home extends React.Component {
                     backgroundImage: `url(${require("../../assets/background2.gif")})`,
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover",
+                    minHeight: "500px"
                 }}>
                     <Col offset={2}>
                         <ScheduleCarForm language={this.props.language}/>
@@ -34,8 +34,6 @@ class Home extends React.Component {
                 </Row>
                 <Divider /> */}
                 <CompanyIntro />
-                <Divider />
-                <Partner language={this.props.language}/>
             </Content>
         );
     }

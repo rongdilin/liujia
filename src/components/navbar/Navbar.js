@@ -28,10 +28,13 @@ class Navbar extends React.Component {
                         <Styles.Header> J & G Rental</Styles.Header>
                     </div>
                     <div>
+                        {/* [TODO]: need to add new pages */}
                         <Menu mode="horizontal" style={{ background: "rgb(38, 38, 38)" }}>
                             <Menu.Item key="/" ><Link to="/" style={{ color: "rgb(255, 255, 255)" }}>{Localize("home", this.state.language)}</Link></Menu.Item>
-                            {/* <Menu.Item key="/company"><Link to="/company" style={{ color: "rgb(255, 255, 255)" }}>{Localize("company", this.props.language)}</Link></Menu.Item> */}
-                            {/* <Menu.Item key="/owner"><Link to="/owner" style={{ color: "rgb(255, 255, 255)" }}>{Localize("company", this.props.language)}Owner</Link></Menu.Item> */}
+                            <Menu.Item key="/location"><Link to="/location" style={{ color: "rgb(255, 255, 255)" }}>{Localize("location", this.state.language)}</Link></Menu.Item>
+                            <Menu.Item key="/cars"><Link to="/cars" style={{ color: "rgb(255, 255, 255)" }}>{Localize("cars", this.state.language)}</Link></Menu.Item>
+                            <Menu.Item key="/service"><Link to="/services" style={{ color: "rgb(255, 255, 255)" }}>{Localize("services", this.state.language)}</Link></Menu.Item>
+                            <Menu.Item key="/connectUs"><Link to="/connectUs" style={{ color: "rgb(255, 255, 255)" }}>{Localize("connectUs", this.state.language)}</Link></Menu.Item>
                         </Menu>
                     </div>
                 </div>

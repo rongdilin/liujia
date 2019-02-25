@@ -14,7 +14,7 @@ export const FormTitle = styled.div`
 
 export const ScheduleCarForm = styled(Form)`
     background: rgba(0, 0, 0, 0.7);
-    padding: 20px;
+    padding: 40px;
     border-radius: 15px;
     margin-top: 30px;
     margin-bottom: 20px;
